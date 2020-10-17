@@ -1,1 +1,66 @@
-<p>form works!</p>
+<h2>Data</h2>
+
+<div class="container">
+
+	<div class="row custom-wrapper">
+
+		<div class="col-md-12">
+
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        	
+        	<label> Name: <input type="text" formControlName="name" required> </label>
+        	<p></p>
+        
+        	<label> Email: <input type="text" formControlName="email" required> </label>
+        	<p></p>
+          
+        	<label> Feedback:
+            <p></p>
+
+            <div class="d-block my-3">
+	         	
+	         	<div class="custom-control custom-radio">
+	            	<input id="Great" type="radio" class="custom-control-input" value="Great" name="feedback" formControlName="feedback"> 
+	            	<label class="custom-control-label" for="Great">Great</label>
+	            </div>
+
+	            <div class="custom-control custom-radio">
+                	<input id="Okay" type="radio" class="custom-control-input" value="Okay" name="feedback" formControlName="feedback">
+                	<label class="custom-control-label" for="Okay">Okay</label>
+                </div>
+
+                <div class="custom-control custom-radio">
+                	<input id="Not good" type="radio" class="custom-control-input" value="Not good" name="feedback" formControlName="feedback">
+                	<label class="custom-control-label" for="Not good">Not good</label>
+                </div>
+
+            </div>
+
+        	</label>
+        	<p></p>
+
+            <div class="form-group">
+            	<label for="comment">Comments: </label>
+            	<p></p>
+
+            	<textarea class="form-control" name="comment" id="comment" formControlName="comment" rows="3" placeholder="Add comments here"></textarea>
+            </div>
+          	<p></p>
+
+        <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+
+        </form>
+    	</div>
+	</div>
+</div>
+<br> 
+<hr>
+  
+  
+<p> Form Value: {{ profileForm.value | json }} </p>
+<p> Form Status: {{ profileForm.status }} </p>
+
+<hr>
+
+
+<app-messages></app-messages>
