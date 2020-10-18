@@ -47,18 +47,22 @@
             </div>
           	<p></p>
 
+        <p> Form Status: {{ profileForm.status }} </p>
+        <p> Form Value: {{ profileForm.value | json }} </p>
+
         <button type="submit" [disabled]="!profileForm.valid">Submit</button>
 
         </form>
     	</div>
 	</div>
 </div>
-<br> 
-<hr>
-  
-<p> Form Value: {{ profileForm.value | json }} </p>
-<p> Form Status: {{ profileForm.status }} </p>
-
-<hr>
-
+<br>
 <app-messages></app-messages>
+<br>
+<hr>
+
+<h2> Current Details </h2>
+<p> Name: {{ crInfo.name }} </p>
+<p> Email: {{ crInfo.email }} </p>
+<p> Feedback: {{ crInfo.feedback }} </p>
+<p> Comment: {{ crInfo.comment }} </p>

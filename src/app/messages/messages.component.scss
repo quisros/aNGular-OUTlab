@@ -1,0 +1,18 @@
+h2 {
+	font-size: 180%;
+}
+
+button {
+  font-family: Arial;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  cursor: hand;
+  font-size: 15px;
+  background-color: #ddd;
+}
+
+button:hover {
+  background-color: #cfd8dc;
+}

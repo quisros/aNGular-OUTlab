@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { ContactComponent } from './contact/contact.component';
 import { FormComponent } from './form/form.component';
-import { DetailsComponent } from './details/details.component';
 import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
@@ -17,7 +16,6 @@ import { MessagesComponent } from './messages/messages.component';
     HeaderComponent,
     ContactComponent,
     FormComponent,
-    DetailsComponent,
     MessagesComponent
   ],
   imports: [

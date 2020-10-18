@@ -13,6 +13,7 @@ import { Validators } from "@angular/forms";
 export class FormComponent implements OnInit {
 
   profileForm: any;
+  crInfo: Info;
 
   constructor(private interactService: InteractService, private fb: FormBuilder) {
     this.profileForm = this.fb.group({
@@ -21,9 +22,17 @@ export class FormComponent implements OnInit {
       feedback: ["", [Validators.required]],
       comment: [""]
     });
+    this.crInfo = {
+      name: " ",
+      email: " ",
+      feedback: " ",
+      comment: " "
+    };
   }
 
  ngOnInit() {
+
+    this.interactService.clearMsg();
 
     this.interactService.getInfos().subscribe(data => {
       this.profileForm.setValue({
@@ -32,6 +41,10 @@ export class FormComponent implements OnInit {
         feedback: data.feedback,
         comment: data.comment
       });
+      this.crInfo.name = data.name;
+      this.crInfo.email = data.email;
+      this.crInfo.feedback = data.feedback;
+      this.crInfo.comment = data.comment;
     }); 
     
  }
@@ -49,8 +62,22 @@ export class FormComponent implements OnInit {
     let serializedForm = JSON.stringify(formObj);
 
     this.interactService.postInfos(serializedForm).subscribe(
-      data => {console.log(data);this.interactService.createMsg('Form submitted successfully!');},
-      error => {this.interactService.createMsg('Error occurred in form submission!');}
+      data => {
+        console.log(data);
+        this.interactService.createMsg('Form submitted successfully!');
+        this.interactService.createMsg('Created '+ serializedForm);
+        this.crInfo.name = this.profileForm.get('name').value;
+        this.crInfo.email = this.profileForm.get('email').value;
+        this.crInfo.feedback = this.profileForm.get('feedback').value;
+        this.crInfo.comment = this.profileForm.get('comment').value;
+        this.profileForm.setValue({
+          name: "",
+          email: "",
+          feedback: "",
+          comment: ""
+        });
+      },
+      error => {this.interactService.createMsg('Error occurred in form submission - form submission was unsuccessful!');}
       );
   }
 
