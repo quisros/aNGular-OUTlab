@@ -12,8 +12,6 @@ import { Validators } from "@angular/forms";
 })
 export class FormComponent implements OnInit {
 
-  infos: Info;
-  aninfos: Info[];
   profileForm: any;
 
   constructor(private interactService: InteractService, private fb: FormBuilder) {
@@ -27,13 +25,17 @@ export class FormComponent implements OnInit {
 
  ngOnInit() {
 
-    this.getInfos();
-    this.profileForm.name.setValue(this.infos.name);
-  }
+    this.interactService.getInfos().subscribe(data => {
+      this.profileForm.setValue({
+        name: data.name,
+        email: data.email,
+        feedback: data.feedback,
+        comment: data.comment
+      });
+    }); 
+    
+ }
 
-  public getInfos() {
-    this.interactService.getInfos().subscribe((data: Info) => this.infos = data);
-  }
 
   get myForm() {
     return this.profileForm.get('feedback');
@@ -47,8 +49,8 @@ export class FormComponent implements OnInit {
     let serializedForm = JSON.stringify(formObj);
 
     this.interactService.postInfos(serializedForm).subscribe(
-      data => this.interactService.createMsg('Form submitted successfully!'),
-      error => this.interactService.createMsg('Error occurred in form submission!')
+      data => {console.log(data);this.interactService.createMsg('Form submitted successfully!');},
+      error => {this.interactService.createMsg('Error occurred in form submission!');}
       );
   }
 
